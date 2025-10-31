@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Refeição - OpenFoodFacts</title>
+  <link rel="icon" type="image/png" href="image/logoTCC.png"/>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-image: url(https://img.freepik.com/free-photo/buddha-bowl-dish-with-vegetables-legumes-top-view_1150-42589.jpg?w=2000);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      margin: 20px;
+      max-width: 600px;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      outline: none;
+    }
+    select:focus, input:focus {
+      border-color: #007bff;
+    }
+    .result {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+    }
+    .result:last-child {
+      border-bottom: none;
+    }
+    .result h3 {
+      margin: 0;
+      color: #007bff;
+    }
+    .btn-add {
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-add:hover {
+      background: #218838;
+    }
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+      #search{
+        width: 500px;
+      }
+
+      #tipoRefeicao{
+        width: 522px;
+        margin: 20px 0 0 0;
+      }
+
+      .container label, p{
+        font-size: 20px;
+        font-weight: 50;
+      }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Adicione aqui os alimentos dessa refeição!</h1>
+
+    <label for="tipoRefeicao">Qual a refeição:</label>
+    <select id="tipoRefeicao">
+      <option value="">Selecione</option>
+      
+      <option value="Café da Manhã">☕ Café da Manhã</option>
+      <option value="Almoço">🍛 Almoço</option>
+      <option value="Lanche da Tarde">🥪 Lanche da Tarde</option>
+      <option value="Janta">🍽 Janta</option>
+      <option value="Ceia">🌙 Ceia</option>
+      <option value="Outro">Outro</option>
+    </select>
+    <p>Qual o alimento:</p>
+    <input type="text" id="search" placeholder="Digite o nome de um alimento... (ex: arroz, banana, frango)">
+    <div id="results"></div>
+
+    <a href="refeicao.html" class="link">Ver refeições adicionadas →</a>
+    <a href="home.php" class="link">← Voltar para o início</a>
+  </div>
+
+  <script>
+    const input = document.getElementById('search');
+    const results = document.getElementById('results');
+    const tipoRefeicao = document.getElementById('tipoRefeicao');
+    let timeout = null;
+
+    input.addEventListener('input', () => {
+      const query = input.value.trim();
+      clearTimeout(timeout);
+      if (query.length < 2) {
+        results.innerHTML = '';
+        return;
+      }
+      timeout = setTimeout(() => buscarAlimentos(query), 500);
+    });
+
+    async function buscarAlimentos(query) {
+      results.innerHTML = '<p>🔍 Buscando...</p>';
+      try {
+        const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=8`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data.products || data.products.length === 0) {
+          results.innerHTML = '<p>😕 Nenhum alimento encontrado.</p>';
+          return;
+        }
+        mostrarResultados(data.products);
+      } catch (error) {
+        console.error(error);
+        results.innerHTML = '<p>❌ Erro ao buscar alimentos.</p>';
+      }
+    }
+
+    function mostrarResultados(produtos) {
+      results.innerHTML = '';
+      produtos.forEach(prod => {
+        const nome = prod.product_name || 'Sem nome';
+        const marca = prod.brands || 'Marca desconhecida';
+        const calorias = prod.nutriments?.['energy-kcal_100g'] 
+          ? prod.nutriments['energy-kcal_100g'] 
+          : 0;
+
+        const div = document.createElement('div');
+        div.classList.add('result');
+        div.innerHTML = `
+          <h3>${nome}</h3>
+          <p><strong>Marca:</strong> ${marca}</p>
+          <p><strong>Calorias:</strong> ${calorias} kcal / 100g</p>
+          <button class="btn-add">Adicionar</button>
+        `;
+
+        const btn = div.querySelector('.btn-add');
+        btn.onclick = () => adicionarAlimento({ nome, marca, calorias });
+        results.appendChild(div);
+      });
+    }
+
+    function adicionarAlimento(alimento) {
+      const tipo = tipoRefeicao.value;
+      if (!tipo) {
+        alert('⚠️ Escolha o tipo de refeição antes de adicionar!');
+        return;
+      }
+
+      let refeicoes = JSON.parse(localStorage.getItem('refeicoes')) || {};
+      if (!refeicoes[tipo]) refeicoes[tipo] = [];
+
+      refeicoes[tipo].push(alimento);
+      localStorage.setItem('refeicoes', JSON.stringify(refeicoes));
+
+      alert(`✅ ${alimento.nome} adicionado à refeição "${tipo}"!`);
+    }
+  </script>
+</body>
+</html>

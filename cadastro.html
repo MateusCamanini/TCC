@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" type="image/png" href="image/logoTCC.png"/>
+
+
+  <style>
+   
+    body {
+      background: url('https://img.freepik.com/free-photo/top-view-assortment-healthy-food_23-2148381272.jpg?w=2000') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .w3-card{
+      padding: 40px 70px 40px 70px ;
+      border-radius: 30px ;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 40px;
+    }
+    label{
+      color:rgb(0, 0, 0);
+      font-size: 18px;
+
+    }
+    input, select {
+      background-color: #ececec;
+      padding: 8px;
+      text-align: center;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 450px; 
+      box-sizing: border-box; 
+    }
+    .w3-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .botao-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .botao{
+      padding: 10px;
+      border-radius: 10px;
+      width: 150px; 
+      background-color: #ffffff; 
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.9);
+    }
+
+    .botao:hover {
+      background-color: #858585;
+    }
+
+    .botao:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .formulario{
+      color: black;
+      font-size: 35px;
+      font-weight: 600;
+      margin: 10px 0 20px 0;
+
+    }
+
+    .barra{
+      margin: 50px 0 50px 0;
+      border: none;
+      height: 1px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class=" w3-card">
+    <h2 class="formulario">Formulário de Cadastro</h2>
+
+    <form action="processa_dados.php" method="post" class="w3-container">
+
+
+      <div class="w3-section">
+        <label class="name"><b>Nome:</b></label>
+        <input name="txtNome" class="caixanome" type="text" required>
+      </div>
+
+      <div class="w3-section">
+        <label class="date"><b>Data de Nascimento:</b></label>
+        <input name="txtDataNascimento" class="caixadata" type="date">
+      </div>
+
+      <div class="w3-section">
+        <label class="email"><b>Email:</b></label>
+        <input name="txtEmail" class="caixaemail" type="email">
+      </div>
+
+      <div class="w3-section">
+        <label class="senha"><b>Senha:</b></label>
+        <input name="txtSenha" class="senha" type="password">
+      </div>
+      <div class="w3-section">
+        <label class="cpf"><b>CPF:</b></label>
+        <input name="txtCPF" placeholder="Ex: 123.456.789-10" class="caixacpf" type="text">
+      </div>
+
+      <div class="w3-section">
+        <label class="telefone"><b>Telefone:</b></label>
+        <input name="txtTelefone" class="caixatelefone" type="text">
+      </div>
+
+      <hr class="barra">
+
+      <div class="w3-section">
+        <label class="peso"><b>Peso (Kg):</b></label>
+        <input name="txtPeso" class="caixapeso">
+      </div>
+
+      <div class="w3-section">
+        <label class="altura"><b>Altura (m):</b></label>
+        <input name="txtAltura" class="caixaaltura">
+      </div>
+
+      <div class="w3-section">
+        <label class="genero"><b>Sexo:</b></label>
+        <select name="txt_genero" class="caixagenero">
+          <option value="" disabled selected>Selecione</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outros">Outros</option>
+        </select>
+      </div>
+
+      <div class="w3-section">
+        <label class="atividade"><b>Nível de Atividade:</b></label>
+        <select name="txt_nivelAtividade" class="caixaatividade">
+          <option value="" disabled selected>Selecione</option>
+          <option value="Sedentário">Sedentário (0 a 1 dia/semana)</option>
+          <option value="Moderadamente Ativo">Moderadamente Ativo (2 a 3 dias/semana)</option>
+          <option value="Ativo">Ativo (4 a 5 dias/semana)</option>
+          <option value="Muito Ativo">Muito Ativo (6 a 7 dias/semana)</option>
+        </select>
+      </div>
+
+      <div class="w3-section">
+        <label class="objetivo"><b>Objetivo:</b></label>
+        <select name="txt_objetivo" class="caixaobjetivo">
+          <option value="" disabled selected>Selecione</option>
+          <option value="Perda de Peso Leve">Perda de Peso Leve</option>
+          <option value="Perda de Peso Agressiva">Perda de Peso Agressiva</option>
+          <option value="Ganho de Massa Leve">Ganho de Massa Leve</option>
+          <option value="Ganho de Massa Agressiva">Ganho de Massa Agressiva</option>
+          <option value="Manutenção de Peso">Manutenção de Peso</option>
+          <option value="Melhora do Condicionamento">Melhora do Condicionamento</option>
+        </select>
+      </div>
+
+      <div class="w3-section">
+        <label class="restricoes"><b>Restrições Alimentares:</b></label>
+        <input name="txt_Restricoes" class="caixarestricoes" placeholder="Ex: lactose, glúten...">
+      </div>
+
+      <div class="w3-section">
+        <label class="preferencias"><b>Preferências Alimentares:</b></label>
+        <input name="txt_Preferencias" class="caixapreferencias" placeholder="Ex: vegetariano, vegano...">
+      </div>
+
+      <div class="w3-section">
+        <label class="historico"><b>Histórico de Saúde:</b></label>
+        <input name="txt_HistoricoDeSaude" class="caixahistorico" placeholder="Ex: hipertensão, alergias...">
+      </div>
+
+      <div class="botao-container">
+        <button type="submit" class="botao">Cadastrar -></button>
+      </div>
+
+    </form>
+  </div>
+
+</body
+
+

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos NutriVida</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #182e15ec;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.planos {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.card {
+  background: #f3f1f1;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 310px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(250, 250, 250, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #000000;
+}
+
+.card h2 {
+  color: #030303;
+  font-weight: 800;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
+.card .desc {
+  font-size: 0.9rem;
+  color: #131212;
+  margin-bottom: 1rem;
+  text-align: center;
+  min-height: 60px;
+}
+
+.price {
+  background: #000000;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.price span {
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.price h1 {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.price p {
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.avista {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: #3a9120;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #074701;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1.2rem;
+}
+
+ul li {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  background: #000000;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.price1{
+  padding: 40px 0 35px 0;
+  margin: 18px 0 30px 0;
+  background: #000000;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Cores diferentes por plano */
+.basico { border-top: 5px solid #3a9120; }
+.premium { border-top: 5px solid #3a9120; }
+.vip { border-top: 5px solid #3a9120; }
+
+
+
+  </style>
+</head>
+<body>
+  <section class="pricing">
+    <h1 class="titulo">Escolha o plano ideal para sua saúde </h1>
+
+    <div class="planos">
+
+      <!-- Plano Básico -->
+      <div class="card basico">
+        <h2>BÁSICO</h2>
+        <p class="desc">Comece sua jornada saudável com acompanhamento e dicas personalizadas.</p>
+        <div class="price1">
+          <h1 id="atual">Plano atual</h1>
+        </div>
+        <p class="avista"></p>
+        <button class="btn">ASSINAR PLANO</button>
+
+        <ul>
+          <li>🥦 10 Planos alimentares</li>
+          <li>📅 Acompanhamento mensal</li>
+          <li>📱 App com receitas e dicas</li>
+          <li>🧾 Relatórios nutricionais</li>
+          <li>✅ Acesso à comunidade NutriVida</li>
+        </ul>
+      </div>
+
+      <!-- Plano Premium -->
+      <div class="card premium">
+        <h2>PREMIUM</h2>
+        <p class="desc">Receba um plano alimentar personalizado e suporte direto com nutricionistas.</p>
+        <div class="price">
+          <span>12x</span>
+          <h1>R$15</h1>
+          <p>por mês</p>
+        </div>
+        <p class="avista">À vista R$150</p>
+        <button class="btn">ASSINAR PLANO</button>
+
+        <ul>
+          <li>🥗 Todos os benefícios do BÁSICO</li>
+          <li>📞 Consultas quinzenais com nutricionista</li>
+          <li>📊 Avaliação corporal detalhada</li>
+          <li>🍎 Receitas exclusivas e ajustadas</li>
+          <li>🌿 Acesso antecipado a novos programas</li>
+        </ul>
+      </div>
+
+      <!-- Plano VIP -->
+      <div class="card vip">
+        <span class="badge">Mais indicado para resultados rápidos 🌟</span>
+        <h2>VIP SAÚDE TOTAL</h2>
+        <p class="desc">Tenha um acompanhamento completo com IA nutricional e suporte diário.</p>
+        <div class="price">
+          <span>12x</span>
+          <h1>R$30</h1>
+          <p>por mês</p>
+        </div>
+        <p class="avista">À vista R$350</p>
+        <button class="btn">ASSINAR PLANO</button>
+
+        <ul>
+          <li>🍏 Todos os benefícios do PREMIUM</li>
+          <li>🤖 Assistente virtual de nutrição (IA)</li>
+          <li>📆 Acompanhamento diário via app</li>
+          <li>👩‍⚕ Consultas semanais com nutricionista</li>
+          <li>💪 Treinos personalizados + receitas balanceadas</li>
+          <li>📘 Ebook de alimentação saudável incluso</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</body>
+</html>

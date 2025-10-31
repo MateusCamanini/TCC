@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Refeições</title>
+  <link rel="icon" type="image/png" href="image/logoTCC.png"/>
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+      background: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fbr%2Ffotos%2Fnutri%25C3%25A7%25C3%25A3o&psig=AOvVaw0VDTuGF0_VNWijCgPkJqBW&ust=1761779468597000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCKjn24yCyJADFQAAAAAdAAAAABAL);
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #lista {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px; /* Espaço entre as seções de refeição */
+    }
+    section {
+      width: 100%;
+      max-width: 500px; /* Limita a largura da seção */
+      border: 1px solid #ffffff00;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    h2 {
+      background: #007bff;
+      color: white;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .alimento {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+    }
+    .alimento:last-child {
+      border-bottom: none;
+    }
+    .alimento h3 {
+      margin: 0;
+      color: #007bff;
+    }
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #333;
+    }
+    .btn-clear {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    .btn-clear:hover {
+      background: #c82333;
+    }
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #total-dia {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🍽 Minhas Refeições</h1>
+    <div id="lista"></div>
+    <div id="total-dia"></div>
+    <button class="btn-clear" id="limpar">🗑️ Limpar tudo</button>
+    <a href="adicionaAlimentos.html" class="link">← Voltar para adicionar mais</a>
+  </div>
+
+  <script>
+    const lista = document.getElementById('lista');
+    const limparBtn = document.getElementById('limpar');
+    const totalDiaEl = document.getElementById('total-dia');
+
+    function carregarRefeicoes() {
+      const refeicoes = JSON.parse(localStorage.getItem('refeicoes')) || {};
+      lista.innerHTML = '';
+      totalDiaEl.style.display = 'none';
+
+      const tipos = Object.keys(refeicoes);
+      if (tipos.length === 0) {
+        lista.innerHTML = '<p>Nenhuma refeição adicionada ainda.</p>';
+        totalDiaEl.style.display = 'none';
+        return;
+      }
+
+      let totalCaloriasDia = 0;
+
+      tipos.forEach(tipo => {
+        const alimentos = refeicoes[tipo];
+        let totalCal = 0;
+
+
+        const sec = document.createElement('section');
+        const titulo = document.createElement('h2');
+        titulo.textContent = tipo;
+        sec.appendChild(titulo);
+
+        alimentos.forEach(alimento => {
+          totalCal += Number(alimento.calorias);
+          const div = document.createElement('div');
+          div.classList.add('alimento');
+          div.innerHTML = `
+            <h3>${alimento.nome}</h3>
+            <p><strong>Marca:</strong> ${alimento.marca}</p>
+            <p><strong>Calorias:</strong> ${alimento.calorias} kcal</p>
+          `;
+          sec.appendChild(div);
+        });
+
+        const totalDiv = document.createElement('p');
+        totalDiv.classList.add('total');
+        totalDiv.textContent = `🔥 Total da Refeição: ${totalCal.toFixed(1)} kcal`;
+        sec.appendChild(totalDiv);
+
+        lista.appendChild(sec);
+        totalCaloriasDia += totalCal;
+      });
+
+      if (totalCaloriasDia > 0) {
+        totalDiaEl.textContent = `🔥 Total de Calorias do Dia: ${totalCaloriasDia.toFixed(1)} kcal`;
+        totalDiaEl.style.display = 'block';
+      }
+    }
+
+    limparBtn.onclick = () => {
+      localStorage.removeItem('refeicoes');
+      carregarRefeicoes();
+    };
+
+    carregarRefeicoes();
+  </script>
+</body>
+</html>

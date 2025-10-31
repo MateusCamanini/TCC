@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutricionista Virtual</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="icon" type="image/png" href="imagens/capa.png"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth; /* Adiciona rolagem suave para âncoras */
+    }
+
+    body {
+      background: url('https://img.freepik.com/free-photo/buddha-bowl-dish-with-vegetables-legumes-top-view_1150-42589.jpg?w=2000') no-repeat center center/cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-attachment: fixed;
+      overflow-y: auto;
+    }
+
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #858585;
+    }
+
+   
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Background escuro apenas para o conteúdo principal do hero */
+    .hero h1,
+    .hero p {
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px auto;
+      max-width: 90%;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #ffffff;
+      max-width: 700px;
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-shadow: 2px 2px 10px rgba(206, 206, 206, 0.7);
+    }
+
+    .btn {
+      background: #e2e2e2;
+      color: black;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background: #818080;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color:white
+    }
+
+    button{
+      padding: 5px 10px 5px 10px;
+      background: #d3d2d2;
+      color: rgb(0, 0, 0);
+      border-radius: 5px;
+    }
+    #contatos {
+      scroll-margin-top: 90px; /* evita que o header fixe cobre o conteúdo ao navegar por âncoras */
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      border-radius: 10px;
+      width: min(1000px, 95%);
+      margin: 40px auto 60px auto; /* aumentado margin-bottom */
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    #contatos h2 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    #contatos p {
+      font-size: 18px;
+      margin: 6px 0;
+    }
+
+    #contatos a {
+      color: #0b6b1f;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    #contatos .contato-form {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #contatos .contato-form label {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    #contatos .contato-form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    #contatos .contato-form input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+
+    #contatos .btn-enviar {
+      align-self: center;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"> NutriTech</div>
+    <nav>
+      <ul>
+        <li><a href="telaInicial.html">Início</a></li>
+        <li><a href="planos.html">Planos</a></li>
+        <li><a href="#contatos">Contato</a></li>
+        <li><a href="login.html" class="botao-link">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Bem-vindo à sua Nutricionista Virtual!</h1>
+    <p>Descubra o plano alimentar ideal para o seu objetivo e acompanhe sua evolução de forma prática e personalizada.</p>
+    <a href="cadastro.html" class="btn">Começar Agora</a>
+  </section>
+<!-- Seção de Contatos -->
+  <section id="contatos" aria-label="Contatos">
+    <h2>Contatos</h2>
+    <p>Telefones: <a href="tel:+5511999999999">+55 (11) 99999-9999</a></p>
+    <p>E-mail: <a href="mailto:contato@nutritech.com">contato@nutritech.com</a></p>
+    <p>Se preferir, deixe sua mensagem abaixo que entraremos em contato.</p>
+
+    <form id="formContato" action="enviar_contato.php" method="POST" class="contato-form">
+      <label for="contato-nome">Seu Nome:</label>
+      <input type="text" id="contato-nome" name="nome" placeholder="Digite seu nome completo" required>
+      <label for="contato-telefone">Seu Telefone:</label>
+      <input type="tel" id="contato-telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required>
+      <label for="mensagem">Descreva seu problema ou dúvida:</label>
+      <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
+      <button type="submit" class="btn-calcular btn-enviar">Enviar Mensagem</button>
+    </form>
+  </section>
+  <footer>
+    &copy; 2025 NutriTech — Sua saúde em primeiro lugar.
+  </footer>
+</body>
+</html>
+</html>
